@@ -15,7 +15,8 @@ Semaphore used for maintaining fifo order of read/write requests made for access
 Semaphore used for requesting exclusive access to modify reader_count variable
 ### Readers_mutex: 
 Semaphore used for avoiding conflicting accesses to entry and exit section (aiding in achieving mutual exclusion condition that only one reader can enter/ exit the critical section at a time) as multiple readers can simultaneously access the resource/ critical section. 
-### Reader's Code
+## Reader's Code
+``` c
 void *reader(void *id)
 {
   //ENTRY SECTION
@@ -53,7 +54,9 @@ void *reader(void *id)
   sem_post(&readers_mutex); // release access to modify readers count
   return id;
 }
-### Writer's Code
+```
+## Writer's Code
+``` c
 void *writer(void *id)
 {
   sem_wait(&order_mutex); //check for the turn to get executed, puts the blocked process in a fifo queue if it's not its turn currently
@@ -64,7 +67,7 @@ void *writer(void *id)
   sem_post(&access_mutex); //release the access to the critical section so that it can be used by any waiting reader
   return id;
 }
-
+``` 
 ## Correctness of Solution
 ### Mutual Exclusion:
 The access_mutex semaphore ensure that only a single writer can access the critical section at any moment, aiding in mutual exclusion amongst writers. As, if any other writer try to enter then the value of access_mutex won’t allow it to do so.
