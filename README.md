@@ -8,8 +8,8 @@ All readers and writers will be granted access to the resource in their order of
 ***This Problem can be solved using Semaphores and Mutex***
 ## Constraints
 1 Any number of Readers can access database when there are no active writers.
-2 Writers can access database when there are no readers and other writers (i.e, only one at a time).
-3 At any time, Only a single thread can manipulate state variables.
+1 Writers can access database when there are no readers and other writers (i.e, only one at a time).
+1 At any time, Only a single thread can manipulate state variables.
 ## Implementation of Queue
 A queue is used to maintain the blocked processes in their order of arrival. The first process to enter is waken up first so as to ensure that no process waits for too long.
 Besides, this helps to give a fair chance to both readers and writers to execute without any starvation.
